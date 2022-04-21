@@ -1,0 +1,1 @@
+# disciplina-Tecnicas-de-Teste-reconhecimento-de-competencias
