@@ -11,6 +11,7 @@ import br.edu.ifpb.dac.trainee.service.exception.TaskException;
 @SpringBootTest
 class TaskTest {
 	
+	
 
 	@Test
 	void descriptionNullException() {
