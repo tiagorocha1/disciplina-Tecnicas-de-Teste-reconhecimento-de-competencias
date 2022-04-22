@@ -1,4 +1,4 @@
-package br.edu.ifpb.dac.trainee.controller.dto;
+package br.edu.ifpb.dac.trainee.model.dto;
 
 import java.time.LocalDateTime;
 

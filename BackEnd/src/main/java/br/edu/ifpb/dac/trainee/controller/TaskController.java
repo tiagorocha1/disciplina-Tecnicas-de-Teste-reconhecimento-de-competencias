@@ -24,12 +24,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.edu.ifpb.dac.trainee.controller.dto.CategoryDto;
-import br.edu.ifpb.dac.trainee.controller.dto.TaskDetailDto;
-import br.edu.ifpb.dac.trainee.controller.dto.TaskDto;
-import br.edu.ifpb.dac.trainee.controller.dto.TaskFormAdd;
-import br.edu.ifpb.dac.trainee.controller.dto.TaskFormUpdate;
 import br.edu.ifpb.dac.trainee.model.Task;
+import br.edu.ifpb.dac.trainee.model.dto.CategoryDto;
+import br.edu.ifpb.dac.trainee.model.dto.TaskDetailDto;
+import br.edu.ifpb.dac.trainee.model.dto.TaskDto;
+import br.edu.ifpb.dac.trainee.model.dto.TaskFormAdd;
+import br.edu.ifpb.dac.trainee.model.dto.TaskFormUpdate;
 import br.edu.ifpb.dac.trainee.service.TaskService;
 import br.edu.ifpb.dac.trainee.service.auth.TokenService;
 

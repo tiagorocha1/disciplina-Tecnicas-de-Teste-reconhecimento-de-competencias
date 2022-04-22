@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.edu.ifpb.dac.trainee.controller.dto.LoginForm;
-import br.edu.ifpb.dac.trainee.controller.dto.TokenDto;
 import br.edu.ifpb.dac.trainee.model.User;
+import br.edu.ifpb.dac.trainee.model.dto.LoginForm;
+import br.edu.ifpb.dac.trainee.model.dto.TokenDto;
 import br.edu.ifpb.dac.trainee.model.repository.UserRepository;
 import br.edu.ifpb.dac.trainee.service.auth.TokenService;
 
