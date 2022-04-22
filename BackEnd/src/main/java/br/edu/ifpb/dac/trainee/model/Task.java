@@ -9,6 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
+
+import br.edu.ifpb.dac.trainee.service.exception.TaskException;
 
 @Entity
 public class Task implements Serializable {
@@ -18,12 +21,15 @@ public class Task implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@NotNull
 	private String description;
 	private LocalDateTime creationDate = LocalDateTime.now();
 	private LocalDateTime finishDate;
 	@ManyToOne
+	@NotNull
 	private User user;
 	private boolean done = false;
+	@NotNull
 	@ManyToOne
 	private Category category;
 
@@ -32,6 +38,13 @@ public class Task implements Serializable {
 	}
 
 	public Task(String description, boolean done,Category category) {
+		
+		if(description==null) {
+			throw new TaskException("Task: description is null");
+		}else if(category==null) {
+			throw new TaskException("Task: category is null");
+		}
+			
 		this.description = description;
 		this.done = done;
 		this.category = category;

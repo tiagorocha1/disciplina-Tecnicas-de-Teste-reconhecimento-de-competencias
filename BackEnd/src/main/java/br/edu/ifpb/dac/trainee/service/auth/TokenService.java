@@ -1,4 +1,4 @@
-package br.edu.ifpb.dac.trainee.config.security;
+package br.edu.ifpb.dac.trainee.service.auth;
 
 import java.util.Date;
 

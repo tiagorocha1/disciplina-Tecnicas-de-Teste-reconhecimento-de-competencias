@@ -1,4 +1,4 @@
-package br.edu.ifpb.dac.trainee.config.security;
+package br.edu.ifpb.dac.trainee.controller.config.security;
 
 import java.io.IOException;
 import javax.servlet.FilterChain;
@@ -12,6 +12,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import br.edu.ifpb.dac.trainee.model.User;
 import br.edu.ifpb.dac.trainee.model.repository.UserRepository;
+import br.edu.ifpb.dac.trainee.service.auth.TokenService;
 
 public class AutenticationViaTokenFilter extends OncePerRequestFilter {
 

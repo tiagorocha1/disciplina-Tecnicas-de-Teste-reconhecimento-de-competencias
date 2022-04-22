@@ -1,4 +1,4 @@
-package br.edu.ifpb.dac.trainee.config.security;
+package br.edu.ifpb.dac.trainee.controller.config.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -15,6 +15,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import br.edu.ifpb.dac.trainee.model.repository.UserRepository;
+import br.edu.ifpb.dac.trainee.service.auth.AutenticationService;
+import br.edu.ifpb.dac.trainee.service.auth.TokenService;
 
 @EnableWebSecurity
 @Configuration

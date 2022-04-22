@@ -24,14 +24,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.edu.ifpb.dac.trainee.config.security.TokenService;
 import br.edu.ifpb.dac.trainee.controller.dto.CategoryDto;
 import br.edu.ifpb.dac.trainee.controller.dto.TaskDetailDto;
 import br.edu.ifpb.dac.trainee.controller.dto.TaskDto;
-import br.edu.ifpb.dac.trainee.controller.dto.form.TaskFormAdd;
-import br.edu.ifpb.dac.trainee.controller.dto.form.TaskFormUpdate;
+import br.edu.ifpb.dac.trainee.controller.dto.TaskFormAdd;
+import br.edu.ifpb.dac.trainee.controller.dto.TaskFormUpdate;
 import br.edu.ifpb.dac.trainee.model.Task;
 import br.edu.ifpb.dac.trainee.service.TaskService;
+import br.edu.ifpb.dac.trainee.service.auth.TokenService;
 
 @RestController()
 @RequestMapping("/api/tasks")

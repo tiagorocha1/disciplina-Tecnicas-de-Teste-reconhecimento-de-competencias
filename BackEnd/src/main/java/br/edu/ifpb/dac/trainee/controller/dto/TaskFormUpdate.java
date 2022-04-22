@@ -1,4 +1,4 @@
-package br.edu.ifpb.dac.trainee.controller.dto.form;
+package br.edu.ifpb.dac.trainee.controller.dto;
 
 import java.time.LocalDateTime;
 import javax.validation.constraints.NotEmpty;

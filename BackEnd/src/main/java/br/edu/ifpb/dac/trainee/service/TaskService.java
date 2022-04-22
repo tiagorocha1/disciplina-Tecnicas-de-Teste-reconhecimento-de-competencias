@@ -17,7 +17,7 @@ import br.edu.ifpb.dac.trainee.model.User;
 import br.edu.ifpb.dac.trainee.model.repository.CategoryRepository;
 import br.edu.ifpb.dac.trainee.model.repository.TaskRepository;
 import br.edu.ifpb.dac.trainee.model.repository.UserRepository;
-import br.edu.ifpb.dac.trainee.service.exception.TaskFormException;
+import br.edu.ifpb.dac.trainee.service.exception.TaskException;
 
 @Service
 public class TaskService {
@@ -41,7 +41,7 @@ public class TaskService {
 
 		} else {
 
-			throw new TaskFormException(now() + "TaskService: Category is null");
+			throw new TaskException(now() + "TaskService: Category is null");
 		}
 
 	}
@@ -53,7 +53,7 @@ public class TaskService {
 		if (optional.isPresent()) {
 			return optional.get();
 		} else {
-			throw new TaskFormException(now() + "TaskService: Task is null");
+			throw new TaskException(now() + "TaskService: Task is null");
 		}
 
 	}

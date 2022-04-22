@@ -1,4 +1,4 @@
-package br.edu.ifpb.dac.trainee.config.security;
+package br.edu.ifpb.dac.trainee.controller.config.security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

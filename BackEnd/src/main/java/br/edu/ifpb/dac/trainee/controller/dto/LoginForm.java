@@ -1,4 +1,4 @@
-package br.edu.ifpb.dac.trainee.controller.dto.form;
+package br.edu.ifpb.dac.trainee.controller.dto;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
