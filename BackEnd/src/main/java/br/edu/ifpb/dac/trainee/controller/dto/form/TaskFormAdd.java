@@ -1,10 +1,11 @@
-package br.edu.ifpb.dac.trainee.controller.form;
+package br.edu.ifpb.dac.trainee.controller.dto.form;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import br.edu.ifpb.dac.trainee.controller.service.TaskService;
+
 import br.edu.ifpb.dac.trainee.model.Category;
 import br.edu.ifpb.dac.trainee.model.Task;
+import br.edu.ifpb.dac.trainee.service.TaskService;
 
 public class TaskFormAdd {
 

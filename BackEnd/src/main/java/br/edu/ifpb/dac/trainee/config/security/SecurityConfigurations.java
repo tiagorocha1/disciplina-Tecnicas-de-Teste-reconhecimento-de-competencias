@@ -14,7 +14,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import br.edu.ifpb.dac.trainee.repository.UserRepository;
+import br.edu.ifpb.dac.trainee.model.repository.UserRepository;
 
 @EnableWebSecurity
 @Configuration

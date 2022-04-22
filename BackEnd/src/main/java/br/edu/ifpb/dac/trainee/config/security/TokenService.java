@@ -26,17 +26,14 @@ public class TokenService {
 		User logado = (User) authentication.getPrincipal();
 		Date hoje = new Date();
 		Date dataDeExpiracao = new Date(hoje.getTime() + Long.parseLong(expiration));
-		
-		return Jwts.builder().setIssuer("Api System Trainee")
-							.setSubject(logado.getId().toString())
-							.setIssuedAt(hoje)
-							.setExpiration(dataDeExpiracao)
-							.signWith(SignatureAlgorithm.HS256, secret)
-							.compact();
+
+		return Jwts.builder().setIssuer("Api System Trainee").setSubject(logado.getId().toString()).setIssuedAt(hoje)
+				.setExpiration(dataDeExpiracao).signWith(SignatureAlgorithm.HS256, secret).compact();
 	}
 
-	public boolean isValid(String token) {
+	public boolean isValid(HttpServletRequest request) {
 
+		String token = recuperarToken(request);
 		try {
 
 			Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token);
@@ -49,23 +46,36 @@ public class TokenService {
 
 	}
 
-	public Long getIdUsuario(String token) {
+	public boolean isValid(String token) {
+		try {
+
+			Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token);
+
+			return true;
+		} catch (Exception e) {
+			// Token invalido gera exception
+			return false;
+		}
+	}
+
+	public Long getIdUsuario(HttpServletRequest request) {
+
+		String token = recuperarToken(request);
+
 		Claims claims = Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token).getBody();
+
 		return Long.parseLong(claims.getSubject());
 	}
-	
+
 	public String recuperarToken(HttpServletRequest request) {
 
 		String token = request.getHeader("Authorization");
-		
-		if(token == null || token.isEmpty() || token.isBlank() || !token.startsWith("Bearer ") ) {
+
+		if (token == null || token.isEmpty() || token.isBlank() || !token.startsWith("Bearer ")) {
 			return null;
 		}
-		
-		
+
 		return token.substring(7, token.length());
 	}
-
-	
 
 }

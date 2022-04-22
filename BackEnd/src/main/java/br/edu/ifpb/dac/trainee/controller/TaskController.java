@@ -24,13 +24,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import br.edu.ifpb.dac.trainee.config.security.TokenService;
 import br.edu.ifpb.dac.trainee.controller.dto.CategoryDto;
 import br.edu.ifpb.dac.trainee.controller.dto.TaskDetailDto;
 import br.edu.ifpb.dac.trainee.controller.dto.TaskDto;
-import br.edu.ifpb.dac.trainee.controller.form.TaskFormAdd;
-import br.edu.ifpb.dac.trainee.controller.form.TaskFormUpdate;
-import br.edu.ifpb.dac.trainee.controller.service.TaskService;
+import br.edu.ifpb.dac.trainee.controller.dto.form.TaskFormAdd;
+import br.edu.ifpb.dac.trainee.controller.dto.form.TaskFormUpdate;
 import br.edu.ifpb.dac.trainee.model.Task;
+import br.edu.ifpb.dac.trainee.service.TaskService;
 
 @RestController()
 @RequestMapping("/api/tasks")
@@ -38,14 +39,17 @@ public class TaskController {
 	
 	@Autowired
 	private TaskService taskService;
+	
+	@Autowired
+	private TokenService tokenService;
 
 	@GetMapping	
 	public List<TaskDto> list(@RequestParam(required = false) String search, HttpServletRequest request) {
 		
-		String token = taskService.getToken(request);
+		Long idUsuario = tokenService.getIdUsuario(request);
 		
 		if (search==null || search.isEmpty()) {
-			List<Task>  tasks = taskService.listAll(token);
+			List<Task>  tasks = taskService.listAll(idUsuario);
 			
 			if(tasks!=null) {
 				return TaskDto.toConvert(tasks);	
@@ -56,7 +60,7 @@ public class TaskController {
 		}else {
 			List<Task>  tasks = null;
 			try {
-				  tasks = taskService.searchDescription(search, token);
+				  tasks = taskService.searchDescription(search, idUsuario);
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -78,12 +82,12 @@ public class TaskController {
 	@CrossOrigin
 	public ResponseEntity<TaskDto> adicionar(@RequestBody @Valid TaskFormAdd form, UriComponentsBuilder uriBuilder,  HttpServletRequest request) {
 
-		String token = taskService.getToken(request);
+		Long idUsuario = tokenService.getIdUsuario(request);
 		
 		Task task = form.converter(taskService);
 		
 
-		task = taskService.save(task, token);
+		task = taskService.save(task, idUsuario);
 		
 		if(task!=null) {
 			URI uri = uriBuilder.path("/task/{id}").buildAndExpand(task.getId()).toUri();

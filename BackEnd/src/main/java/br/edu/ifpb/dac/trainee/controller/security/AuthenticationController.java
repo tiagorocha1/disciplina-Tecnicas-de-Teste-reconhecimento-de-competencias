@@ -1,4 +1,4 @@
-package br.edu.ifpb.dac.trainee.controller;
+package br.edu.ifpb.dac.trainee.controller.security;
 
 import javax.validation.Valid;
 
@@ -14,9 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.ifpb.dac.trainee.config.security.TokenService;
-import br.edu.ifpb.dac.trainee.controller.form.LoginForm;
+import br.edu.ifpb.dac.trainee.controller.dto.TokenDto;
+import br.edu.ifpb.dac.trainee.controller.dto.form.LoginForm;
 import br.edu.ifpb.dac.trainee.model.User;
-import br.edu.ifpb.dac.trainee.repository.UserRepository;
+import br.edu.ifpb.dac.trainee.model.repository.UserRepository;
 
 @RestController
 @RequestMapping("/auth")

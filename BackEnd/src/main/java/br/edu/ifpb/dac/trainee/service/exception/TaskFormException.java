@@ -1,4 +1,4 @@
-package br.edu.ifpb.dac.trainee.exception;
+package br.edu.ifpb.dac.trainee.service.exception;
 
 public class TaskFormException extends RuntimeException {
 

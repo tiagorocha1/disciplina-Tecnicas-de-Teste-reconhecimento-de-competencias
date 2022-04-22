@@ -1,4 +1,4 @@
-package br.edu.ifpb.dac.trainee.controller.service;
+package br.edu.ifpb.dac.trainee.service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -10,24 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.edu.ifpb.dac.trainee.config.security.TokenService;
 import br.edu.ifpb.dac.trainee.controller.dto.CategoryDto;
-import br.edu.ifpb.dac.trainee.exception.TaskFormException;
 import br.edu.ifpb.dac.trainee.model.Category;
 import br.edu.ifpb.dac.trainee.model.Task;
 import br.edu.ifpb.dac.trainee.model.User;
-import br.edu.ifpb.dac.trainee.repository.CategoryRepository;
-import br.edu.ifpb.dac.trainee.repository.TaskRepository;
-import br.edu.ifpb.dac.trainee.repository.UserRepository;
+import br.edu.ifpb.dac.trainee.model.repository.CategoryRepository;
+import br.edu.ifpb.dac.trainee.model.repository.TaskRepository;
+import br.edu.ifpb.dac.trainee.model.repository.UserRepository;
+import br.edu.ifpb.dac.trainee.service.exception.TaskFormException;
 
 @Service
 public class TaskService {
 
 	@Autowired
 	private CategoryRepository categoryRepsitory;
-	
-	@Autowired
-	private TokenService tokenService;
 	
 	@Autowired
 	private UserRepository userRepository;
@@ -71,9 +67,9 @@ public class TaskService {
 		
 	}
 
-	public List<Task> listAll(String token) {
+	public List<Task> listAll(long idUsuario) {
 
-		Long idUsuario = tokenService.getIdUsuario(token);
+		
 		Optional<User> optional = userRepository.findById(idUsuario);
 		
 		if(optional.isPresent()) {
@@ -83,9 +79,8 @@ public class TaskService {
 		return null;
 	}
 
-	public List<Task> searchDescription(String search,String token) {
-
-		Long idUsuario = tokenService.getIdUsuario(token);
+	public List<Task> searchDescription(String search,long idUsuario) {
+		
 		Optional<User> optional = userRepository.findById(idUsuario);
 		
 		if(optional.isPresent()) {
@@ -95,9 +90,7 @@ public class TaskService {
 		return null;
 	}
 
-	public Task save(Task task, String token) {
-		
-		Long idUsuario = tokenService.getIdUsuario(token);
+	public Task save(Task task, long idUsuario) {
 		
 		Optional<User> user = userRepository.findById(idUsuario);
 		
@@ -133,9 +126,6 @@ public class TaskService {
 		return listDto;
 	}
 
-	public String getToken(HttpServletRequest request) {
-
-		return tokenService.recuperarToken(request);
-	}
+	
 
 }

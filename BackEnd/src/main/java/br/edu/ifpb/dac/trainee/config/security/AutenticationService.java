@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import br.edu.ifpb.dac.trainee.model.User;
-import br.edu.ifpb.dac.trainee.repository.UserRepository;
+import br.edu.ifpb.dac.trainee.model.repository.UserRepository;
 
 @Service
 public class AutenticationService implements UserDetailsService{

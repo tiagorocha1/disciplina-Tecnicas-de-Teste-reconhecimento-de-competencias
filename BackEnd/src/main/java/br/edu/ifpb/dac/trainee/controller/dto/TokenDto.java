@@ -1,4 +1,4 @@
-package br.edu.ifpb.dac.trainee.controller;
+package br.edu.ifpb.dac.trainee.controller.dto;
 
 public class TokenDto {
 

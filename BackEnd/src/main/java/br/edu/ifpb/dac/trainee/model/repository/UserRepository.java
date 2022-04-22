@@ -1,4 +1,4 @@
-package br.edu.ifpb.dac.trainee.repository;
+package br.edu.ifpb.dac.trainee.model.repository;
 
 import java.util.Optional;
 
