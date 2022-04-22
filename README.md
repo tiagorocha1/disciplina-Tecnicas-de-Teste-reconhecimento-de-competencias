@@ -1,1 +1,1 @@
-# disciplina-Tecnicas-de-Teste-reconhecimento-de-competencias
+# Projeto para obtenção de reconhecimento de competências
