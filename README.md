@@ -15,10 +15,10 @@
   </br>
   </br>
   <strong>Tópicos a serem avaliados:</strong>
-   - Testes de Unidade (Junit)
-   - Testes de Integração (Junit)
-   - Testes de Sistema (pode usar Selenium e Junit)
-   - Testes de Aceitação (pode ser um documento descritivo ou o planejamento durante a apresentação)
+   - Testes de Unidade 
+   - Testes de Integração 
+   - Testes de Sistema 
+   - Testes de Aceitação 
 
   Os testes serão avaliados durante a apresentação (que deverá durar no máximo 30 min).
 
