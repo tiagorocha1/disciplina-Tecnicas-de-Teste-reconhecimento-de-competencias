@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import br.edu.ifpb.dac.trainee.model.Category;
+import br.edu.ifpb.dac.trainee.model.Task;
 import br.edu.ifpb.dac.trainee.service.exception.TaskException;
 
 @SpringBootTest
