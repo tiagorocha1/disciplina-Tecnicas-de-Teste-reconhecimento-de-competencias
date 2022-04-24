@@ -1,4 +1,4 @@
-package br.edu.ifpb.dac.trainee.model.dto;
+package br.edu.ifpb.dac.trainee.controller.dto.form;
 
 import java.time.LocalDateTime;
 import javax.validation.constraints.NotEmpty;
@@ -8,7 +8,7 @@ import br.edu.ifpb.dac.trainee.model.Category;
 import br.edu.ifpb.dac.trainee.model.Task;
 import br.edu.ifpb.dac.trainee.service.TaskService;
 
-public class TaskFormUpdate {
+public class TaskUpdateForm {
 
 	@NotNull
 	@NotEmpty

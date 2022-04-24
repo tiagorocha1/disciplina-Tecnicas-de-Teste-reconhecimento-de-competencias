@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.edu.ifpb.dac.trainee.controller.dto.TokenDto;
+import br.edu.ifpb.dac.trainee.controller.dto.form.LoginForm;
 import br.edu.ifpb.dac.trainee.model.User;
-import br.edu.ifpb.dac.trainee.model.dto.LoginForm;
-import br.edu.ifpb.dac.trainee.model.dto.TokenDto;
 import br.edu.ifpb.dac.trainee.model.repository.UserRepository;
 import br.edu.ifpb.dac.trainee.service.auth.TokenService;
 
@@ -38,8 +38,8 @@ public class AuthenticationController {
 		UsernamePasswordAuthenticationToken dadosLogin = form.toConvert();
 		try {
 			Authentication authentication = authManager.authenticate(dadosLogin);
-
-			String token = tokenService.gerarToken(authentication);
+			User user = (User) authentication.getPrincipal();
+			String token = tokenService.gerarToken(user);
 
 			return ResponseEntity.ok(new TokenDto(token, true));
 		} catch (AuthenticationException e) {

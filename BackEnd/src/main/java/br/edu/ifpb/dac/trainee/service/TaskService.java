@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.edu.ifpb.dac.trainee.controller.dto.CategoryDto;
 import br.edu.ifpb.dac.trainee.model.Category;
 import br.edu.ifpb.dac.trainee.model.Task;
 import br.edu.ifpb.dac.trainee.model.User;
-import br.edu.ifpb.dac.trainee.model.dto.CategoryDto;
 import br.edu.ifpb.dac.trainee.model.repository.CategoryRepository;
 import br.edu.ifpb.dac.trainee.model.repository.TaskRepository;
 import br.edu.ifpb.dac.trainee.model.repository.UserRepository;

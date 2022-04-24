@@ -40,8 +40,7 @@ class TaskServiceTest {
 	}
 
 	@Test
-	void addTask() {
-		
+	void addTask() {		
 		Category category = categories.get(0);
 		boolean done = false;
 		String description = "test task service";
@@ -50,12 +49,10 @@ class TaskServiceTest {
 		
 		Task taskSave = taskService.save(task, this.user.getId());
 		
-		assertAll(
-				() -> assertNotNull(taskSave),
+		assertAll(() -> assertNotNull(taskSave),
 				() -> assertEquals(this.user.getId(), taskSave.getUser().getId()),
 				() -> assertEquals(description, taskSave.getDescription()),
-				() -> assertEquals(category.getId(), taskSave.getCategory().getId())
-				);
+				() -> assertEquals(category.getId(), taskSave.getCategory().getId()));
 	}
 	
 	@Test
@@ -69,12 +66,10 @@ class TaskServiceTest {
 		
 		Task taskUpdate = taskService.update(task);
 		
-		assertAll(
-				() -> assertNotNull(taskUpdate),
+		assertAll(() -> assertNotNull(taskUpdate),
 				() -> assertEquals(this.user.getId(), taskUpdate.getUser().getId()),
 				() -> assertEquals(taskNewDescription, taskUpdate.getDescription()),
-				() -> assertEquals(task.getCategory().getId(), taskUpdate.getCategory().getId())
-				);
+				() -> assertEquals(task.getCategory().getId(), taskUpdate.getCategory().getId()));
 	}
 	
 	@Test

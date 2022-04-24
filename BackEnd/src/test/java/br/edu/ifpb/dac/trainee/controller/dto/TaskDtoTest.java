@@ -1,10 +1,6 @@
-package br.edu.ifpb.dac.trainee.model.dto;
+package br.edu.ifpb.dac.trainee.controller.dto;
 
 import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -35,5 +31,4 @@ class TaskDtoTest {
 				() -> assertEquals(task.getCategory().getName(), taskDto.getCategoryName()));
 
 	}
-
 }

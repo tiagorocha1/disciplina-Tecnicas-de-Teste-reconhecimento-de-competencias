@@ -24,12 +24,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import br.edu.ifpb.dac.trainee.controller.dto.CategoryDto;
+import br.edu.ifpb.dac.trainee.controller.dto.TaskDetailDto;
+import br.edu.ifpb.dac.trainee.controller.dto.TaskDto;
+import br.edu.ifpb.dac.trainee.controller.dto.form.TaskAddForm;
+import br.edu.ifpb.dac.trainee.controller.dto.form.TaskUpdateForm;
 import br.edu.ifpb.dac.trainee.model.Task;
-import br.edu.ifpb.dac.trainee.model.dto.CategoryDto;
-import br.edu.ifpb.dac.trainee.model.dto.TaskDetailDto;
-import br.edu.ifpb.dac.trainee.model.dto.TaskDto;
-import br.edu.ifpb.dac.trainee.model.dto.TaskFormAdd;
-import br.edu.ifpb.dac.trainee.model.dto.TaskFormUpdate;
 import br.edu.ifpb.dac.trainee.service.TaskService;
 import br.edu.ifpb.dac.trainee.service.auth.TokenService;
 
@@ -80,7 +80,7 @@ public class TaskController {
 	@Transactional
 	@CacheEvict(value = "taskList", allEntries = true)
 	@CrossOrigin
-	public ResponseEntity<TaskDto> adicionar(@RequestBody @Valid TaskFormAdd form, UriComponentsBuilder uriBuilder,  HttpServletRequest request) {
+	public ResponseEntity<TaskDto> adicionar(@RequestBody @Valid TaskAddForm form, UriComponentsBuilder uriBuilder,  HttpServletRequest request) {
 
 		Long idUsuario = tokenService.getIdUsuario(request);
 		
@@ -113,7 +113,7 @@ public class TaskController {
 	@PutMapping("/{id}")
 	@Transactional
 	@CacheEvict(value = "taskList", allEntries = true)
-	public ResponseEntity<TaskDto> atualizar(@PathVariable Long id, @RequestBody @Valid TaskFormUpdate form) {
+	public ResponseEntity<TaskDto> atualizar(@PathVariable Long id, @RequestBody @Valid TaskUpdateForm form) {
 
 		Optional<Task> optional = taskService.getOptionalTask(id);
 		if (optional.isPresent()) {

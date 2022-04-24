@@ -43,6 +43,13 @@ public class User implements Serializable , UserDetails {
 		
 	}
 
+	public User(long id, String email, String password) {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		this.id = id;
+		this.email = email;
+		this.password = encoder.encode(password);
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

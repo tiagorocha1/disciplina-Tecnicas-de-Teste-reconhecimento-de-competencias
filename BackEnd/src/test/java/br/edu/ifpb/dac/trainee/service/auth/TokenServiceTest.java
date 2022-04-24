@@ -2,47 +2,35 @@ package br.edu.ifpb.dac.trainee.service.auth;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.Date;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import br.edu.ifpb.dac.trainee.model.User;
 
 @SpringBootTest
 class TokenServiceTest {
-
-	@Value("${trainee.jwt.expiration}")
-	private String expiration;
-
-	@Value("${trainee.jwt.secret}")
-	private String secret;
 
 	@Autowired
 	private TokenService tokenService;
 
 	@Test
 	void testValidToken() {
-		Date hoje = new Date();
-		Date dataDeExpiracao = new Date(hoje.getTime() + Long.parseLong(expiration));
 
-		String tokenValid = Jwts.builder().setIssuer("Api System Trainee").setSubject(1l + "").setIssuedAt(hoje)
-				.setExpiration(dataDeExpiracao).signWith(SignatureAlgorithm.HS256, secret).compact();
-		
-		assertEquals(true, tokenService.isValid(tokenValid));
+		User user = new User(1l,"test@task.app", "123");
+
+		String token = tokenService.gerarToken(user);
+
+		assertEquals(true, tokenService.isValid(token));
 
 	}
-	
+
 	@Test
 	void testInValidToken() {
-		
-		String tokenValid = "kldshfshdiohfishdfiohsdifhisdhifhsidhfiosdhfiohsidfhioshfihisdhifhsdifs";
-		
+
+		String tokenValid = "Bh#4q!f3ZYW%vpDOx2aK7CU$00MNyPk2b^xHr#nHh$%a@tOZ0K";
+
 		assertEquals(false, tokenService.isValid(tokenValid));
 	}
-
 
 }

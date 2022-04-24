@@ -8,40 +8,33 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import br.edu.ifpb.dac.trainee.model.User;
-
 @SpringBootTest
 public class UserTest {
 
-	private String passwordTest;
-	private User testUser;
 	private BCryptPasswordEncoder encoder;
 
 	@BeforeEach
 	public void initialeTestUser() {
-
 		this.encoder = new BCryptPasswordEncoder();
-		this.passwordTest = "123";
-		this.testUser = new User("email@teste", passwordTest);
 	}
 
 	@Test
 	void testPassword123Encode() {
-		String encode = encoder.encode("123");
-		assertTrue(encoder.matches("123", encode));
+		User user = new User("test@task.app", "123");
+
+		assertTrue(encoder.matches("123", user.getPassword()));
 	}
 
 	@Test
-	void testUserPasswordEncode() {
-
-		assertTrue(encoder.matches("123", this.testUser.getPassword()));
-	}
-
 	void testIfDifferentHashesAreGeneratedForTheSamePassword() {
-		String passwordEncode1 = encoder.encode("123");
-		String passwordEncode2 = testUser.getPassword();
 
-		assertNotEquals(passwordEncode1, passwordEncode2);
+		User user1 = new User("test@task.app", "123");
+		User user2 = new User("test2@task.app", "123");
+
+		assertNotEquals(user1.getPassword(), user2.getPassword());
 	}
 
 }
+
+
+

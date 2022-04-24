@@ -18,6 +18,9 @@ import br.edu.ifpb.dac.trainee.model.repository.UserRepository;
 import br.edu.ifpb.dac.trainee.service.auth.AutenticationService;
 import br.edu.ifpb.dac.trainee.service.auth.TokenService;
 
+
+
+
 @EnableWebSecurity
 @Configuration
 public class SecurityConfigurations extends WebSecurityConfigurerAdapter {

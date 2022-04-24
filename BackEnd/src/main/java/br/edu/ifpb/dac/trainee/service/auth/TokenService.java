@@ -5,7 +5,6 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import br.edu.ifpb.dac.trainee.model.User;
@@ -22,8 +21,7 @@ public class TokenService {
 	@Value("${trainee.jwt.secret}")
 	private String secret;
 
-	public String gerarToken(Authentication authentication) {
-		User logado = (User) authentication.getPrincipal();
+	public String gerarToken(User logado) {		
 		Date hoje = new Date();
 		Date dataDeExpiracao = new Date(hoje.getTime() + Long.parseLong(expiration));
 
