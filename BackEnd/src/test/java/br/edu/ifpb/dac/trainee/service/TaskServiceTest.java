@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.edu.ifpb.dac.trainee.model.Category;
 import br.edu.ifpb.dac.trainee.model.Task;
@@ -36,10 +37,10 @@ class TaskServiceTest {
 	@BeforeEach
 	public void initialize() {
 		this.categories = categoryRepository.findAll();
-		this.user = userRepository.findById(1l).get();		
+		this.user = userRepository.findByEmail("admin@task").get();		
 	}
 
-	@Test
+	@Test	
 	void addTask() {		
 		Category category = categories.get(0);
 		boolean done = false;
@@ -52,12 +53,13 @@ class TaskServiceTest {
 		assertAll(() -> assertNotNull(taskSave),
 				() -> assertEquals(this.user.getId(), taskSave.getUser().getId()),
 				() -> assertEquals(description, taskSave.getDescription()),
-				() -> assertEquals(category.getId(), taskSave.getCategory().getId()));
+				() -> assertEquals(category.getId(), taskSave.getCategory().getId()),
+				() -> assertNotNull(task.getId())
+				);
 	}
 	
 	@Test
-	void updateTask() {
-		
+	void updateTask() {		
 		Task task = taskService.listAll(user.getId()).get(0);
 				
 		String taskNewDescription = "update task description";
