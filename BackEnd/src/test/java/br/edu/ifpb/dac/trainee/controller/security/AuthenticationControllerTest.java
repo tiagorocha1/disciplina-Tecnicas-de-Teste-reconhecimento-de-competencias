@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.concurrent.TimeUnit;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -19,10 +20,15 @@ class AuthenticationControllerTest {
 	private WebDriver browser;
 
 	@BeforeEach
-	private void initialize() {
+	private void beforeEach() {
 		System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
 		this.browser = new ChromeDriver();
 		browser.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+	}
+	
+	@AfterEach
+	private void afterEach() {
+		browser.quit();
 	}
 
 	@Test
@@ -36,7 +42,7 @@ class AuthenticationControllerTest {
 
 		assertNotNull(browser.findElement(By.id("restrito")));
 		assertTrue(browser.getPageSource().contains("logout") );
-		browser.quit();
+	
 	}
 	
 	@Test
@@ -51,7 +57,7 @@ class AuthenticationControllerTest {
 	    
 		assertNotNull(browser.findElement(By.id("submit")));
 		assertThrows(NoSuchElementException.class, () -> browser.findElement(By.id("restrito")));
-		browser.quit();
+	
 
 	}
 	
@@ -60,7 +66,7 @@ class AuthenticationControllerTest {
 		browser.navigate().to(URL_BASE+"tasks");
 		assertNotNull(browser.findElement(By.id("submit")));
 		assertThrows(NoSuchElementException.class, () -> browser.findElement(By.id("restrito")));
-		browser.quit();
+		
 	}
 
 }
