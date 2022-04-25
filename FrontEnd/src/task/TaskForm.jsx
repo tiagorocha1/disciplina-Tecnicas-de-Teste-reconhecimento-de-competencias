@@ -71,9 +71,9 @@ class TaskForm extends Component {
 
                 <Grid cols='12 3 2'>
 
-                    <IconButton btnStyle='primary' icon='plus' onClick={() => add(description, selectedCategoryID)}></IconButton>
-                    <IconButton btnStyle='info' icon='search' onClick={search} />
-                    <IconButton btnStyle='default' icon='close' onClick={this.props.clear} />
+                    <IconButton id="addTask" btnStyle='primary' icon='plus' onClick={() => add(description, selectedCategoryID)}></IconButton>
+                    <IconButton id="searchTask" btnStyle='info' icon='search' onClick={search} />
+                    <IconButton id="cleanTask" btnStyle='default' icon='close' onClick={this.props.clear} />
                 </Grid>
             </div>
         )
