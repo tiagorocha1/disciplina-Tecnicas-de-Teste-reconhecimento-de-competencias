@@ -58,7 +58,7 @@ class Auth extends Component {
                     </div>
 
                     <div className="form-label-group mb-8">
-                        <button className="btn btn-lg btn-primary btn-block" onClick={() => { login(this.state.email, this.state.password) }} >Entrar</button>
+                        <button id="submit"className="btn btn-lg btn-primary btn-block" onClick={() => { login(this.state.email, this.state.password) }} >Entrar</button>
                     </div>
                 </form>
             </div>
