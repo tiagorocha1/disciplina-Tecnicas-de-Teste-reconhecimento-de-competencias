@@ -32,15 +32,11 @@ public class TaskControllerTest {
 		this.taskPage = loginPage.run("admin@task", "123");
 				
 		taskPage.fillField("description",this.descriptionTaskDelete);				
-		taskPage.clickField("addTask");
-		
-		
+		taskPage.clickField("addTask");				
 		taskPage.fillField("description",this.descriptionTaskDone);
-		taskPage.clickField("addTask");
-		
+		taskPage.clickField("addTask");		
 		taskPage.fillField("description",this.descriptionTaskSearch);
-		taskPage.clickField("addTask");
-		
+		taskPage.clickField("addTask");		
 		assertNotNull(taskPage.getTask(descriptionTaskDelete));
 		assertNotNull(taskPage.getTask(descriptionTaskDone));
 		assertNotNull(taskPage.getTask(descriptionTaskSearch));
@@ -58,8 +54,7 @@ public class TaskControllerTest {
 	void taskTest03() {	
 		LoginPage loginPage = new LoginPage();
 		this.taskPage = loginPage.run("admin@task", "123");
-		taskPage.doneTask(this.descriptionTaskDone);
-		
+		taskPage.doneTask(this.descriptionTaskDone);		
 		assertNull(taskPage.getTask("notMarkedAsDone"));
 	}
 	
@@ -67,8 +62,7 @@ public class TaskControllerTest {
 	void taskTest04() {	
 		LoginPage loginPage = new LoginPage();
 		this.taskPage = loginPage.run("admin@task", "123");
-		taskPage.searchTask(this.descriptionTaskSearch);
-		
+		taskPage.searchTask(this.descriptionTaskSearch);		
 		assertNull(taskPage.getTask(descriptionTaskDone));
 	}
 }
