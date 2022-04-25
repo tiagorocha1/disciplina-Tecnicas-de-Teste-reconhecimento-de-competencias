@@ -15,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class AuthenticationControllerTest {
 
+	private static final String URL_BASE="http://localhost:8081/?#/";
 	private WebDriver browser;
 
 	@BeforeEach
@@ -27,7 +28,7 @@ class AuthenticationControllerTest {
 	@Test
 	void loginWithValidData() {
 
-		browser.navigate().to("http://localhost:8081/?#/tasks");
+		browser.navigate().to(URL_BASE+"login");
 
 		browser.findElement(By.id("inputEmail")).sendKeys("admin@task");
 		browser.findElement(By.id("inputPassword")).sendKeys("123");
@@ -41,7 +42,7 @@ class AuthenticationControllerTest {
 	@Test
 	void loginWithInValidData() {
 
-		browser.navigate().to("http://localhost:8081/?#/tasks");
+		browser.navigate().to(URL_BASE+"login");
 
 		browser.findElement(By.id("inputEmail")).sendKeys("admin@task");
 		browser.findElement(By.id("inputPassword")).sendKeys("123456");
@@ -56,9 +57,10 @@ class AuthenticationControllerTest {
 	
 	@Test
 	void restrictedUrl() {
-		browser.navigate().to("http://localhost:8081/?#/tasks");
+		browser.navigate().to(URL_BASE+"tasks");
 		assertNotNull(browser.findElement(By.id("submit")));
 		assertThrows(NoSuchElementException.class, () -> browser.findElement(By.id("restrito")));
+		browser.quit();
 	}
 
 }
