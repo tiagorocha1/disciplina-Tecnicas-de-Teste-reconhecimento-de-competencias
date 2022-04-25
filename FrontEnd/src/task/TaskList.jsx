@@ -10,7 +10,7 @@ const TaskList = props => {
         return list.map(task => (
             <tr key={task.id} className='focus-in-expand-fwd'>                             
           
-                <td className={task.done ? 'markedAsDone col-lg-7 col-md-6 col-sm-5 col-xs-6' : 'col-lg-7 col-md-6 col-sm-5 col-xs-6'} >{task.description}</td>            
+                <td className={task.done ? 'markedAsDone col-lg-7 col-md-6 col-sm-5 col-xs-6 taskLine' : 'col-lg-7 col-md-6 col-sm-5 col-xs-6 taskLine'} >{task.description}</td>            
                 <td className='col-lg-3 col-md-2 col-sm-1 col-xs-0' >{task.categoryName}</td>  
                 <td className='col-lg-2 col-md-1 col-sm-1 col-xs-1'>
                     
