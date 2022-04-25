@@ -11,7 +11,7 @@ import Routes from './Routes'
 
 export default props => {
     return (
-        <div className="container">            
+        <div id="restrito" className="container">            
             <Menu />
             <Routes />
         </div>
