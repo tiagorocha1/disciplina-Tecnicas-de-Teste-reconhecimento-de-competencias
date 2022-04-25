@@ -7,6 +7,8 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import br.edu.ifpb.dac.trainee.controller.TaskPage;
+
 public class LoginPage {
 
 	private static final String URL_BASE = "http://localhost:8081/?#/";
@@ -19,31 +21,45 @@ public class LoginPage {
 		this.to("login");
 	}
 
-	public void quit() { browser.quit();}
+	public void quit() {
+		browser.quit();
+	}
 
 	public void to(String page) {
 		browser.navigate().to(URL_BASE + page);
 	}
 
-	public void fillField(String field, String value) { 
-		browser.findElement(By.id(field)).sendKeys(value);}
+	public void fillField(String field, String value) {
+		browser.findElement(By.id(field)).sendKeys(value);
+	}
 
-	public void clickField(String field) { browser.findElement(By.id(field)).click();}
+	public void clickField(String field) {
+		browser.findElement(By.id(field)).click();
+	}
 
 	public String getElement(String field) {
 		try {
-			return browser.findElement(By.id(field)).getText();	
-		}catch (NoSuchElementException e) {
+			return browser.findElement(By.id(field)).getText();
+		} catch (NoSuchElementException e) {
 			return null;
-		}		
+		}
 	}
 
 	public boolean contains(String field) {
 		return browser.getPageSource().contains(field);
 	}
 
-	public void goToPageRestricted() {
-		this.to("tasks");		
+	public void goToPageTasks() {
+		this.to("tasks");
+	}
+
+	public TaskPage run(String login, String password) {
+
+		this.fillField("inputEmail", login);
+		this.fillField("inputPassword", password);
+		this.clickField("submit");
+		
+		return new TaskPage(browser);
 	}
 
 }

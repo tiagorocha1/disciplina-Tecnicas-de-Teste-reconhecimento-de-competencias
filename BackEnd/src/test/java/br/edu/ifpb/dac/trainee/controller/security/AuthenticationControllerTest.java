@@ -24,14 +24,10 @@ class AuthenticationControllerTest {
 	}
 
 	@Test
-	void loginWithValidData() {
-		loginPage.fillField("inputEmail", "admin@task");
-		loginPage.fillField("inputPassword", "123");
-		loginPage.clickField("submit");
-
+	void loginWithValidData() {			
+		loginPage.run("admin@task","123"); 
 		assertNotNull(loginPage.getElement("restrito"));
 		assertTrue(loginPage.contains("logout"));
-
 	}
 
 	@Test
@@ -42,12 +38,11 @@ class AuthenticationControllerTest {
 
 		assertNotNull(loginPage.getElement("submit"));
 		assertNull(loginPage.getElement("restrito"));
-
 	}
 
 	@Test
 	void restrictedUrl() {
-		loginPage.goToPageRestricted();		
+		loginPage.goToPageTasks();		
 		assertNotNull(loginPage.getElement("submit"));
 		assertNull(loginPage.getElement("restrito"));
 	}

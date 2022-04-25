@@ -1,78 +1,74 @@
 package br.edu.ifpb.dac.trainee.controller;
 
-import static org.mockito.Mockito.when;
-
-import java.util.Optional;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.junit.jupiter.api.BeforeEach;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import org.junit.FixMethodOrder;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.junit.runners.MethodSorters;
+import org.springframework.boot.test.context.SpringBootTest;
 
-import br.edu.ifpb.dac.trainee.controller.config.security.SecurityConfigurations;
-import br.edu.ifpb.dac.trainee.model.Category;
-import br.edu.ifpb.dac.trainee.model.Task;
-import br.edu.ifpb.dac.trainee.model.User;
-import br.edu.ifpb.dac.trainee.model.repository.UserRepository;
-import br.edu.ifpb.dac.trainee.service.TaskService;
-import br.edu.ifpb.dac.trainee.service.auth.AutenticationService;
-import br.edu.ifpb.dac.trainee.service.auth.TokenService;
-import io.restassured.http.ContentType;
+import br.edu.ifpb.dac.trainee.controller.security.LoginPage;
 
-import static io.restassured.module.mockmvc.RestAssuredMockMvc.*;
-
-import org.hamcrest.*;
-
-@WebMvcTest
+@SpringBootTest
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TaskControllerTest {
 
+	private TaskPage taskPage; 
 	
-	@Autowired
-	private TaskController taskController;
-	
-	@MockBean
-	private TaskService taskService;
-	
-	@MockBean
-	private TokenService tokenService;
-	
-	@MockBean
-	private AutenticationService autenticationService;
-	
-	@MockBean
-	private UserRepository userRepository;
+	private String descriptionTaskDelete ="deletar esta task";
+	private String descriptionTaskDone ="finalizar esta task";
+	private String descriptionTaskSearch ="pesquisar esta task";
 	
 
-	
-	@BeforeEach
-	public void setup(){
-		standaloneSetup(this.taskController);
-	
+	@AfterEach
+	private void afterEach() {
+		this.taskPage.quit();
 	}
 	
-	@Test
-	public void returnSuccessWhenFetchingTask() {
-		
-		User user = new User();
-		user.setName("name test");
-		Task task = new Task("task test",true,new Category());
-		task.setUser(user);
-		
+	@Test // create tree tasks
+	void taskTest01() {
+		LoginPage loginPage = new LoginPage();
+		this.taskPage = loginPage.run("admin@task", "123");
 				
-			when(this.taskService.getOptionalTask(1L))
-				.thenReturn(Optional.of(task));
+		taskPage.fillField("description",this.descriptionTaskDelete);				
+		taskPage.clickField("addTask");
 		
-			given()
-				.accept(ContentType.JSON)
-			.when()
-				.get("/api/tasks/{id}",1L)
-			.then()
-				.statusCode(org.springframework.http.HttpStatus.OK.value());
-					
-					
 		
+		taskPage.fillField("description",this.descriptionTaskDone);
+		taskPage.clickField("addTask");
+		
+		taskPage.fillField("description",this.descriptionTaskSearch);
+		taskPage.clickField("addTask");
+		
+		assertNotNull(taskPage.getTask(descriptionTaskDelete));
+		assertNotNull(taskPage.getTask(descriptionTaskDone));
+		assertNotNull(taskPage.getTask(descriptionTaskSearch));
+	}
+	
+	@Test //delete one task
+	void taskTest02() {		
+		LoginPage loginPage = new LoginPage();
+		this.taskPage = loginPage.run("admin@task", "123");
+		taskPage.deleteTask(this.descriptionTaskDelete);	
+		assertNull(taskPage.getTask(descriptionTaskDelete));
+	}
+	
+	@Test //done one task
+	void taskTest03() {	
+		LoginPage loginPage = new LoginPage();
+		this.taskPage = loginPage.run("admin@task", "123");
+		taskPage.doneTask(this.descriptionTaskDone);
+		
+		assertNull(taskPage.getTask("notMarkedAsDone"));
+	}
+	
+	@Test //search one task
+	void taskTest04() {	
+		LoginPage loginPage = new LoginPage();
+		this.taskPage = loginPage.run("admin@task", "123");
+		taskPage.searchTask(this.descriptionTaskSearch);
+		
+		assertNull(taskPage.getTask(descriptionTaskDone));
 	}
 }
